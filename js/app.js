@@ -51,7 +51,8 @@ var app = {
       console.log(search);
       
       var pages = {
-        home: 'home.html'
+        home: 'home.html',
+        p2: 'p2.html'
       };
       
       app.ajax.getLoading('home.html', {}, {
