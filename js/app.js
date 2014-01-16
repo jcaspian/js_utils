@@ -63,7 +63,7 @@ var app = {
       var page = pages[search.page] || pages.error404;
       
       delete search[page];
-      
+      /*
       app.ajax.getLoading(page, search, {
       //app.ajax.getLoading('http://upload.wikimedia.org/wikipedia/commons/2/2d/Snake_River_(5mb).jpg', {foo:'bar'}, {
         done: function (res, status, xhr) {
@@ -76,6 +76,7 @@ var app = {
           app.element.container.append(res);
         }
       });
+      */
     }
   }
 };
