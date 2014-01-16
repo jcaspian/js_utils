@@ -46,7 +46,7 @@ var app = {
   fn: {
     init: function () {
       var search = location.search.substring(1);
-      search = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
+      search = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
       
       console.log(search);
       
