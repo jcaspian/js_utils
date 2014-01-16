@@ -45,6 +45,8 @@ var app = {
   },
   fn: {
     init: function () {
+      window.jsBootstrap = true;
+      
       var search = location.search.substring(1);
       search = search?JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',function(key, value) { return key===""?value:decodeURIComponent(value) }):{};
       
