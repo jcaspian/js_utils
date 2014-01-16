@@ -67,7 +67,8 @@ var app = {
           console.log(xhr.getResponseHeader("content-type"));
           var content = app.element.content.detach();
           
-          app.element.container.prepend(content.empty().append(res));
+          //app.element.container.append(content.empty().append(res));
+          app.element.container.append(res);
         }
       });
     }
