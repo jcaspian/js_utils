@@ -55,6 +55,8 @@ var app = {
         p2: 'p2.html'
       };
       
+      console.log('pages[search.page]', pages[search.page]);
+      
       app.ajax.getLoading('home.html', {}, {
       //app.ajax.getLoading('http://upload.wikimedia.org/wikipedia/commons/2/2d/Snake_River_(5mb).jpg', {foo:'bar'}, {
         done: function (res, status, xhr) {
