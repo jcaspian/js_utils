@@ -6,4 +6,7 @@
   some extensive shit is going on here
 </p>
 
-<script>console.log(location);</script>
+<script>
+console.log([location.origin,'/',location.pathname.toString().substring(location.pathname.toString().lastIndexOf('/'),location.pathname.toString().lastIndexOf('.')-1)].join(''));
+//!window.jsBootstrap || (location.href = [location.origin,'/',location.pathname.toString().substring(location.pathname.toString().lastIndexOf('/'),location.pathname.toString().lastIndexOf('.')-1)].join(''));
+</script>
