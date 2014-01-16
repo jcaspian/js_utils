@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="css/loadingbar.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="loadingbar"><dt><dd></dd></dt></div>
+    <!-- jQuery v2.0.3 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="xhr2.js"></script>
+    <script>
+      var app = {
+        loadingbar: {
+          element: $('#loadingbar'),
+          show: function () {
+            app.loadingbar.element.addClass('isloading');
+          },
+          hide: function () {
+            app.loadingbar.element.removeClass('isloading');
+          },
+          toggle: function () {
+            app.loadingbar.element.toggleClass('isloading');
+          }
+        },
+        ajax: {
+          getLoading: function (url, data, callback, dataType) {
+            app.ajax.call('GET', url, data, callback, dataType);
+          },
+          postLoading: function (url, data, callback, dataType) {
+            app.ajax.call('POST', url, data, callback, dataType);
+          },
+          call: function (type, url, data, callback, dataType) {
+            callback.progress = function (e) {
+              if (e.lengthComputable) {  
+                var percent = e.loaded / e.total * 100;
+                app.loadingbar.element.width([percent, '%'].join(''));
+              }
+            };
+            callback.beforeSend = function () {
+              app.loadingbar.show();
+            };
+            callback.always = function () {
+              app.loadingbar.hide();
+            };
+            if (type === 'GET') {
+              $.getLoading(url, data, callback, dataType);
+            } else if (type === 'POST') {
+              $.postLoading(url, data, callback, dataType);
+            }
+          }
+        }
+      };
+      app.ajax.getLoading('http://upload.wikimedia.org/wikipedia/commons/2/2d/Snake_River_(5mb).jpg', {foo:'bar'}, {
+      //$.getLoading('https://graph.facebook.com/?ids=http://www.imdb.com/title/tt0117500/', {foo:'bar'}, {
+        done: function (res, status, xhr) {
+          console.log('done');
+          console.log(xhr.getResponseHeader("content-type"));
+        }
+      });
+    </script>
+  </body>
+</html>
