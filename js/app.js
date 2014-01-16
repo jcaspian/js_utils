@@ -34,7 +34,9 @@ var app = {
         app.loadingbar.show();
       };
       callback.always = function () {
-        app.loadingbar.hide();
+        setTimeout(function () {
+          app.loadingbar.hide();
+        }, 2000);
       };
       if (type === 'GET') {
         $.getLoading(url, data, callback, dataType);
