@@ -13,6 +13,7 @@ app.ext = {
       console.log('binding event for home');
     },
     init: function () {
+      app.fn.bindEvent();
       app.ext.fn.bindEvent();
     }
   }
