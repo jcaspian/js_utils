@@ -20,7 +20,15 @@
   
   $._ajax = function (type, url, data, callback, dataType) {
     var o = { method: type, url: url, data: data, dataType: dataType };
-    'function' == typeof callback? o.success = callback: o.success = callback.success && o.error = callback.error && o.complete = callback.complete && o.progress = callback.progress;
+    //'function' == typeof callback? o.success = callback: o.success = callback.success && o.error = callback.error && o.complete = callback.complete && o.progress = callback.progress;
+    if ('function' == typeof callback) {
+      o.success = callback;
+    } else {
+      o.success = callback.success;
+      o.error = callback.error;
+      o.complete = callback.complete;
+      o.progress = callback.progress;
+    }
     $.ajax(o);
   };
   
