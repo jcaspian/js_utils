@@ -50,20 +50,22 @@ var app = {
       window.jsBootstrap = true;
       
       var search = location.search.substring(1);
-      search = search?JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',function(key, value) { return key===""?value:decodeURIComponent(value) }):{};
-      
-      console.log(search);
-      
       var pages = {
         home: 'home.html',
         p2: 'p2.html',
         error404: 'error404.html'
       };
+      var page = pages.error404;
       
-      var page = pages[search.page] || pages.error404;
+      try {
+        search = search?JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',function(key, value) { return key===""?value:decodeURIComponent(value) }):{};
+        page = pages[search.page]
+      } catch (e) {
+        console.log(e);
+      }
       
-      delete search[page];
-      /*
+      delete search['page'];
+      
       app.ajax.getLoading(page, search, {
       //app.ajax.getLoading('http://upload.wikimedia.org/wikipedia/commons/2/2d/Snake_River_(5mb).jpg', {foo:'bar'}, {
         done: function (res, status, xhr) {
@@ -76,7 +78,6 @@ var app = {
           app.element.container.append(res);
         }
       });
-      */
     }
   }
 };
