@@ -30,7 +30,7 @@ var app = {
       });
     },
     bindEvent: function () {
-      $('a:not[target]').on('tap click', function (e) {
+      $('a:not[target]').on('click', function (e) {
         console.log(this);
         //$.get();
         e.preventDefault();
