@@ -4,6 +4,8 @@
   some extensive shit is going on here
 </p>
 
+<a href="?page=home">the fuck?</a>
+
 <script>
 app.ext = {
   fn: {
