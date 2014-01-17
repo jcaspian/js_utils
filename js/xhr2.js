@@ -1,6 +1,36 @@
-(function($) {
+(function($, window, undefined) {
 	$.support.cors = true;
   
+  var hasOnProgress = ('onprogress' in $.ajaxSettings.xhr());
+  var $._get = $.get;
+  var $._post = $.post;
+  
+  hasOnProgress || return;
+  
+  var oXHR = $.ajaxSettings.xhr;
+  $.ajaxSettings.xhr = function () {
+    var xhr = oXHR();
+    !xhr instanceof window.XMLHttpRequest || xhr.addEventListener('progress', this.progress, false);
+    !xhr.upload || xhr.upload.addEventListener('progress', this.progress, false);
+    
+    return xhr;
+  };
+  
+  $._ajax = function (type, url, data, callback, dataType) {
+    var o = { method: type, url: url, data: data, dataType: dataType };
+    'function' == typeof callback? o.success = callback: o.success = callback.success && o.error = callback.error && o.complete = callback.complete && o.progress = callback.progress;
+    $.ajax(o);
+  };
+  
+  $.get = function (url, data, callback, dataType) {
+    try {
+      $._ajax('GET', url, data, callback, dataType);
+    } catch (e) {
+      console.log(e);
+      $._get(url, data, 'function' == typeof callback? callback:callback.success, dataType);
+    }
+  }
+  /*
   var originalXhr = $.ajaxSettings.xhr,
       xhr2 = window.XMLHttpRequest && ('upload' in new XMLHttpRequest());
   
@@ -56,4 +86,5 @@
 			$.post(url, data, ('object' == typeof callback) ? callback.done:callback, dataType);
 		}
 	}
-})(jQuery);
+  */
+})(jQuery, window);

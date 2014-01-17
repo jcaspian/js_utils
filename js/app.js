@@ -73,7 +73,7 @@ var app = {
       }
       
       delete search['page'];
-      
+      /*
       app.ajax.getLoading(page, search, {
       //app.ajax.postLoading(page, search, {
       //app.ajax.getLoading('http://upload.wikimedia.org/wikipedia/commons/2/2d/Snake_River_(5mb).jpg', search, {
@@ -86,6 +86,20 @@ var app = {
           app.element.container.append(content.append(res));
         }
       }, 'html');
+      */
+      $.get(page, search, {
+        success: function (res, status, xhr) {
+        },
+        progress: function (e) {
+          if (e.lengthComputable) {  
+            var percent = e.loaded / e.total * 100;
+            console.log('Loading', percent);
+            app.element.loadingbar.width([percent, '%'].join(''));
+          } else {
+            console.log('e length not computable');
+          }
+        }
+      });
     }
   }
 };
