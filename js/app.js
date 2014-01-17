@@ -43,8 +43,8 @@ var app = {
           console.log($(this));
         } catch (e) {}
         //$.get();
-        //e.preventDefault();
-        //return false;
+        e.preventDefault();
+        return false;
       });
     },
     loadPage: function () {
