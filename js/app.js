@@ -107,7 +107,7 @@ var app = {
         beforeSend: function () {
           app.loadingbar.show();
         },
-        always: function () {
+        complete: function () {
           setTimeout(function () {
             app.loadingbar.hide();
           }, 2000);
