@@ -42,7 +42,8 @@
   
 	$.getLoading = function (url, data, callback, dataType) {
 		if (xhr2) {
-      $._ajax('GET', url, data, callback, dataType);
+      //$._ajax('GET', url, data, callback, dataType);
+      $._ajax('HEAD', url, data, callback, dataType);
 		} else {
 			$.get(url, data, ('object' == typeof callback) ? callback.done:callback, dataType);
 		}
