@@ -5,15 +5,15 @@
 </p>
 
 <script>
-app.extend = {
+app.ext = {
   fn: {
     bindEvent: function () {
       console.log('binding event for home');
     },
     init: function () {
-      app.extend.fn.bindEvent();
+      app.ext.fn.bindEvent();
     }
   }
 };
-app.extend.fn.init();
+app.ext.fn.init();
 </script>

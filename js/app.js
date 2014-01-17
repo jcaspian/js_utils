@@ -29,6 +29,12 @@ var app = {
         }
       });
     },
+    bindEvent: function () {
+      $('a:not[target]').on('tap click', function () {
+        console.log(this);
+        //$.get();
+      });
+    },
     loadPage: function () {
       var search = location.search.substring(1);
       var pages = {
