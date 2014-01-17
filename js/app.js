@@ -18,6 +18,8 @@ var app = {
   },
   fn: {
     init: function () {
+      window.console || (window.console = { log: function () {} });
+      
       app.fn.ajaxSetup();
       window.jsBootstrap = true;
       
@@ -62,10 +64,10 @@ var app = {
         progress: function (e) {
           if (e.lengthComputable) {  
             var percent = e.loaded / e.total * 100;
-            console.log('Loading', percent);
+            //console.log('Loading', percent);
             app.element.loadingbar.width([percent, '%'].join(''));
           } else {
-            console.log('e length not computable');
+            //console.log('e length not computable');
           }
         }
       });
