@@ -67,6 +67,7 @@ var app = {
         success: function (res, status, xhr) {
           var content = app.element.content.detach().empty();
           app.element.container.append(content.append(res));
+          app.fn.bindEvent();
         }
       }, 'html');
     },
