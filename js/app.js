@@ -65,7 +65,8 @@ var app = {
       
       try {
         search = search?JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',function(key, value) { return key===""?value:decodeURIComponent(value) }):{};
-        page = pages[search.page]
+        //page = pages[search.page]
+        page = search.page;
       } catch (e) {
         console.log(e);
         search = {};
