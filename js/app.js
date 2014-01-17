@@ -23,11 +23,12 @@ var app = {
       app.fn.ajaxSetup();
       window.jsBootstrap = true;
       
+      console.log(location);
+      
       var search = location.search.substring(1);
       var pages = {
-        home: 'home.html',
-        p2: 'p2.html',
-        error404: 'error404.html'
+        home: 'home',
+        error404: 'error404'
       };
       var page = pages.error404;
       
