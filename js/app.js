@@ -101,19 +101,19 @@ var app = {
           }
         }
       });
+    },
+    ajaxSetup: function () {
+      $.ajaxSetup({
+        beforeSend: function () {
+          app.loadingbar.show();
+        },
+        always: function () {
+          setTimeout(function () {
+            app.loadingbar.hide();
+          }, 2000);
+        }
+      });
     }
-  },
-  ajaxSetup: function () {
-    $.ajaxSetup({
-      beforeSend: function () {
-        app.loadingbar.show();
-      },
-      always: function () {
-        setTimeout(function () {
-          app.loadingbar.hide();
-        }, 2000);
-      }
-    });
   }
 };
 app.fn.init();
