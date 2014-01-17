@@ -42,6 +42,8 @@ var app = {
         $.getLoading(url, data, callback, dataType);
       } else if (type === 'POST') {
         $.postLoading(url, data, callback, dataType);
+      } else {
+        console.log(['Type \'',type, '\' not supported'].join(''));
       }
     }
   },
@@ -72,10 +74,9 @@ var app = {
           console.log('done');
           console.log(res);
           console.log(xhr.getResponseHeader("content-type"));
-          var content = app.element.content.detach();
+          var content = app.element.content.detach().empty();
           
-          //app.element.container.append(content.empty().append(res));
-          app.element.container.append(res);
+          app.element.container.append(content.append(res));
         }
       });
     }
