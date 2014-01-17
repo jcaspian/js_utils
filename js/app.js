@@ -23,8 +23,6 @@ var app = {
       app.fn.ajaxSetup();
       window.jsBootstrap = true;
       
-      console.log(location);
-      
       var search = location.search.substring(1);
       var pages = {
         home: 'home',
@@ -34,6 +32,7 @@ var app = {
       
       try {
         search = search?JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',function(key, value) { return key===""?value:decodeURIComponent(value) }):{};
+        console.log(search);
         //page = pages[search.page]
         page = search.page;
       } catch (e) {
