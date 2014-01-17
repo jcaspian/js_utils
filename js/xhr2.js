@@ -37,6 +37,7 @@
     $.ajax(obj).done(callback.done)
                .fail(callback.fail)
                .always(callback.always);
+    console.log('ajax obj', obj);
   }
   
 	$.getLoading = function (url, data, callback, dataType) {

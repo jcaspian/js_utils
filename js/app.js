@@ -29,6 +29,8 @@ var app = {
           var percent = e.loaded / e.total * 100;
           console.log('Loading', percent);
           app.element.loadingbar.width([percent, '%'].join(''));
+        } else {
+          console.log('e length not computable', e);
         }
       };
       callback.beforeSend = function () {
