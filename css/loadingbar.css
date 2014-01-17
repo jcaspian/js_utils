@@ -4,6 +4,8 @@
   top: 0;
   left: 0;
   width: 0%;
+  opacity: 0;
+  visibility: hidden;
   height: 2px;
   background: #b91f1f;
   -moz-border-radius: 1px;
@@ -17,7 +19,8 @@
 }
 
 #loadingbar.isloading {
-  top: 0;
+  opacity: 1;
+  visibility: visible;
 }
 
 #loadingbar dt {
