@@ -78,7 +78,7 @@ var app = {
         complete: function () {
           setTimeout(function () {
             app.loadingbar.hide();
-          }, 1000);
+          }, 500);
         }
       });
     }
