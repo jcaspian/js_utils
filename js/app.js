@@ -72,7 +72,7 @@ var app = {
       
       app.fn.ajaxSetup();
       app.fn.loadPage();
-      app.fn.bindEvent();
+      //app.fn.bindEvent();
     }
   }
 };
