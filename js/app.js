@@ -25,12 +25,13 @@ var app = {
     },
     call: function (type, url, data, callback, dataType) {
       callback.progress = function (e) {
+        console.log('progress obj', e);
         if (e.lengthComputable) {  
           var percent = e.loaded / e.total * 100;
           console.log('Loading', percent);
           app.element.loadingbar.width([percent, '%'].join(''));
         } else {
-          console.log('e length not computable', e);
+          console.log('e length not computable');
         }
       };
       callback.beforeSend = function () {
@@ -67,12 +68,13 @@ var app = {
         page = pages[search.page]
       } catch (e) {
         console.log(e);
+        search = {};
       }
       
       delete search['page'];
       
-      app.ajax.getLoading(page, search, {
-      //app.ajax.getLoading('http://upload.wikimedia.org/wikipedia/commons/2/2d/Snake_River_(5mb).jpg', {foo:'bar'}, {
+      //app.ajax.getLoading(page, search, {
+      app.ajax.getLoading('http://upload.wikimedia.org/wikipedia/commons/2/2d/Snake_River_(5mb).jpg', search, {
         done: function (res, status, xhr) {
           console.log('done');
           console.log(res);
