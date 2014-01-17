@@ -37,8 +37,11 @@ var app = {
     },
     bindEvent: function () {
       console.log('binding main event');
-      $('a').click(function (e) {
-        console.log(this);
+      $('a').not('[target]').click(function (e) {
+        try {
+          console.log(this);
+          console.log($(this));
+        } catch (e) {}
         //$.get();
         //e.preventDefault();
         //return false;
@@ -65,7 +68,7 @@ var app = {
           var content = app.element.content.detach().empty();
           app.element.container.append(content.append(res));
         }
-      });
+      }, 'html');
     },
     init: function () {
       window.console || (window.console = { log: function () {} });
