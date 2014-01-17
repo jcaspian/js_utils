@@ -5,7 +5,9 @@
   $._get = $.get;
   $._post = $.post;
   
-  !!hasOnProgress || return;
+  if (!hasOnProgress) {
+    return;
+  }
   
   var oXHR = $.ajaxSettings.xhr;
   $.ajaxSettings.xhr = function () {
