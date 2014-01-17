@@ -85,7 +85,7 @@ var app = {
           
           app.element.container.append(content.append(res));
         }
-      });
+      }, 'html');
     }
   }
 };

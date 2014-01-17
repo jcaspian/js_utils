@@ -32,7 +32,7 @@
       obj.beforeSend = callback.beforeSend;
       obj.complete = callback.complete;
     } else {
-      obj.done = callback;
+      obj.complete = callback;
     }
     $.ajax(obj).done(callback.done)
                .fail(callback.fail)
@@ -43,7 +43,7 @@
 	$.getLoading = function (url, data, callback, dataType) {
 		if (xhr2) {
       //$._ajax('GET', url, data, callback, dataType);
-      $._ajax('HEAD', url, data, {complete:function(e){console.log(e)}}, dataType);
+      $._ajax('HEAD', url, data, callback, dataType);
 		} else {
 			$.get(url, data, ('object' == typeof callback) ? callback.done:callback, dataType);
 		}
