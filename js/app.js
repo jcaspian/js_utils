@@ -26,6 +26,12 @@ var app = {
           setTimeout(function () {
             app.loadingbar.hide();
           }, 500);
+        },
+        progress: function (e) {
+          if (e.lengthComputable) {  
+            var percent = e.loaded / e.total * 100;
+            app.element.loadingbar.width([percent, '%'].join(''));
+          }
         }
       });
     },
@@ -58,13 +64,7 @@ var app = {
         success: function (res, status, xhr) {
           var content = app.element.content.detach().empty();
           app.element.container.append(content.append(res));
-          app.fn.bindEvent();
-        },
-        progress: function (e) {
-          if (e.lengthComputable) {  
-            var percent = e.loaded / e.total * 100;
-            app.element.loadingbar.width([percent, '%'].join(''));
-          }
+          //app.fn.bindEvent();
         }
       });
     },
