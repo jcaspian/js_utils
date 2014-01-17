@@ -38,7 +38,7 @@ var app = {
       //} catch (e) {
       //  console.log(e);
         search = {};
-      }
+      //}
       
       delete search['page'];
       /*
