@@ -40,8 +40,8 @@ var app = {
       $('a:not[target=\'_blank\']').on('click', function (e) {
         console.log(this);
         //$.get();
-        e.preventDefault();
-        return false;
+        //e.preventDefault();
+        //return false;
       });
     },
     loadPage: function () {
