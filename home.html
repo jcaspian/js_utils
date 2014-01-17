@@ -1,17 +1,7 @@
-
-<script>/*window.jsBootstrap || (location.href = './?page=home' && location.search = )*/</script>
+<!DOCTYPE html>
+<script src="js/jumper.js"></script>
 
 <h1>hello world!</h1>
 <p>
   some extensive shit is going on here
 </p>
-
-<script>
-console.log(location);
-console.log([location.origin,location.pathname.toString().substring(location.pathname.toString().indexOf('/'),location.pathname.toString().lastIndexOf('/')+1),'?page=',location.pathname.toString().substring(location.pathname.toString().lastIndexOf('/')+1,location.pathname.toString().lastIndexOf('.')),'&',location.search.substring(1)].join(''));
-window.jsBootstrap || (location.href = [location.origin,location.pathname.toString().substring(location.pathname.toString().indexOf('/'),location.pathname.toString().lastIndexOf('/')+1),'?page=',location.pathname.toString().substring(location.pathname.toString().lastIndexOf('/')+1,location.pathname.toString().lastIndexOf('.')),'&',location.search.substring(1)].join(''));
-var s = location.search;
-console.log('s', s); /* ?a=1&page=rofl&s=hit */
-
-//location.search.substring(location.search.toString().indexOf)
-</script>
