@@ -74,7 +74,8 @@ var app = {
       
       delete search['page'];
       
-      app.ajax.postLoading(page, search, {
+      app.ajax.getLoading(page, search, {
+      //app.ajax.postLoading(page, search, {
       //app.ajax.getLoading('http://upload.wikimedia.org/wikipedia/commons/2/2d/Snake_River_(5mb).jpg', search, {
         done: function (res, status, xhr) {
           // console.log('done');
