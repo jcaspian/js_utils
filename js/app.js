@@ -5,6 +5,20 @@ var app = {
     container: $('#container'),
     content: $('#content')
   },
+  support: {
+    historyPushState: true
+  },
+  url: {
+    getParam: function () {
+      var search = location.search.substring(1);
+      try {
+        search = search?JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',function(key, value) { return key===""?value:decodeURIComponent(value) }):{};
+      } catch (e) {
+        search = {};
+      }
+      return search;
+    }
+  },
   loadingbar: {
     show: function () {
       app.element.loadingbar.addClass('isloading');
@@ -36,35 +50,53 @@ var app = {
       });
     },
     bindEvent: function () {
-      console.log('binding main event');
       $('a').not('[target]').click(function (e) {
-        try {
-          console.log(this);
-          console.log($(this));
-        } catch (e) {}
-        //$.get();
+        if (app.support.historyPushState) {
+          app.fn.loadPage(this.href, {}, true);
+        } else {
+          location.href = [location.origin,location.pathname,'?page=',(this.href).toString().replace(location.origin,'').replace(location.pathname,'')].join('');
+        }
         e.preventDefault();
         return false;
       });
     },
-    loadPage: function () {
-      var search = location.search.substring(1);
+    historyInit: function () {
+      if (typeof history.pushState === "undefined") {
+        app.support.historyPushState = false;
+        return;
+      }
+      window.onpopstate = function (e) {
+        if (e.state == null) {
+          return;
+        }
+        app.fn.loadPage(e.state.page, e.state.search);
+      };
+    },
+    loadInitialPage: function () {
       var pages = {
         home: 'home',
         error404: 'error404'
       };
       var page = pages.error404;
       try {
-        search = search?JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',function(key, value) { return key===""?value:decodeURIComponent(value) }):{};
-        console.log('search', search);
+        search = app.url.getParam();
         page = search.page || pages.home;
       } catch (e) {
         console.log(e);
         page = search.page || pages.error404;
       }
       delete search['page'];
+      
+      app.fn.loadPage(page, search);
+    },
+    loadPage: function (page, search, push) {
       $.get(page, search, {
         success: function (res, status, xhr) {
+          push || (push = false);
+          if (push) {
+            page = (page.replace(location.origin,'').replace(location.pathname,''));
+            history.pushState({page: page, search: search}, page, ['?page=', page].join(''));
+          }
           var content = app.element.content.detach().empty();
           app.element.container.append(content.append(res));
           app.fn.bindEvent();
@@ -73,10 +105,11 @@ var app = {
     },
     init: function () {
       window.console || (window.console = { log: function () {} });
+      app.fn.historyInit();
       
       app.fn.ajaxSetup();
       app.fn.bindEvent();
-      app.fn.loadPage();
+      app.fn.loadInitialPage();
     }
   }
 };
