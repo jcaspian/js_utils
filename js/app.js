@@ -16,41 +16,6 @@ var app = {
       app.element.loadingbar.toggleClass('isloading');
     }
   },
-  ajax: {
-    getLoading: function (url, data, callback, dataType) {
-      app.ajax.call('GET', url, data, callback, dataType);
-    },
-    postLoading: function (url, data, callback, dataType) {
-      app.ajax.call('POST', url, data, callback, dataType);
-    },
-    call: function (type, url, data, callback, dataType) {
-      callback.progress = function (e) {
-        console.log('progress obj', e);
-        if (e.lengthComputable) {  
-          var percent = e.loaded / e.total * 100;
-          console.log('Loading', percent);
-          app.element.loadingbar.width([percent, '%'].join(''));
-        } else {
-          console.log('e length not computable');
-        }
-      };
-      callback.beforeSend = function () {
-        app.loadingbar.show();
-      };
-      callback.always = function () {
-        setTimeout(function () {
-          app.loadingbar.hide();
-        }, 2000);
-      };
-      if (type === 'GET') {
-        $.getLoading(url, data, callback, dataType);
-      } else if (type === 'POST') {
-        $.postLoading(url, data, callback, dataType);
-      } else {
-        console.log(['Type \'',type, '\' not supported'].join(''));
-      }
-    }
-  },
   fn: {
     init: function () {
       app.fn.ajaxSetup();
