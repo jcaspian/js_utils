@@ -30,31 +30,17 @@ var app = {
       };
       var page = pages.error404;
       
-      //try {
+      try {
         search = search?JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',function(key, value) { return key===""?value:decodeURIComponent(value) }):{};
         console.log('search', search);
-        //page = pages[search.page]
-        page = search.page;
-      //} catch (e) {
-      //  console.log(e);
-        search = {};
-      //}
+        page = search.page || pages.home;
+      } catch (e) {
+        console.log(e);
+        page = search.page || pages.error404;
+      }
       
       delete search['page'];
-      /*
-      app.ajax.getLoading(page, search, {
-      //app.ajax.postLoading(page, search, {
-      //app.ajax.getLoading('http://upload.wikimedia.org/wikipedia/commons/2/2d/Snake_River_(5mb).jpg', search, {
-        done: function (res, status, xhr) {
-          // console.log('done');
-          // console.log(res);
-          // console.log(xhr.getResponseHeader("content-type"));
-          var content = app.element.content.detach().empty();
-          
-          app.element.container.append(content.append(res));
-        }
-      }, 'html');
-      */
+
       $.get(page, search, {
         success: function (res, status, xhr) {
           var content = app.element.content.detach().empty();
