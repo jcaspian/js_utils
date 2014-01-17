@@ -2,8 +2,8 @@
 	$.support.cors = true;
   
   var hasOnProgress = ('onprogress' in $.ajaxSettings.xhr());
-  var $._get = $.get;
-  var $._post = $.post;
+  $._get = $.get;
+  $._post = $.post;
   
   hasOnProgress || return;
   
