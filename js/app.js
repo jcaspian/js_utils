@@ -30,13 +30,13 @@ var app = {
       };
       var page = pages.error404;
       
-      try {
+      //try {
         search = search?JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',function(key, value) { return key===""?value:decodeURIComponent(value) }):{};
-        console.log(search);
+        console.log('search', search);
         //page = pages[search.page]
         page = search.page;
-      } catch (e) {
-        console.log(e);
+      //} catch (e) {
+      //  console.log(e);
         search = {};
       }
       
