@@ -30,6 +30,7 @@ var app = {
       });
     },
     bindEvent: function () {
+      console.log('binding main event');
       $('a:not[target]').on('click', function (e) {
         console.log(this);
         //$.get();
