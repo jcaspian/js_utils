@@ -110,7 +110,7 @@ var app = {
         complete: function () {
           setTimeout(function () {
             app.loadingbar.hide();
-          }, 2000);
+          }, 1000);
         }
       });
     }
