@@ -30,9 +30,11 @@ var app = {
       });
     },
     bindEvent: function () {
-      $('a:not[target]').on('tap click', function () {
+      $('a:not[target]').on('tap click', function (e) {
         console.log(this);
         //$.get();
+        e.preventDefault();
+        return false;
       });
     },
     loadPage: function () {
@@ -69,6 +71,7 @@ var app = {
       
       app.fn.ajaxSetup();
       app.fn.loadPage();
+      app.fn.bindEvent();
     }
   }
 };
