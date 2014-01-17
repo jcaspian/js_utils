@@ -53,6 +53,7 @@ var app = {
   },
   fn: {
     init: function () {
+      app.fn.ajaxSetup();
       window.jsBootstrap = true;
       
       var search = location.search.substring(1);
@@ -101,6 +102,18 @@ var app = {
         }
       });
     }
+  },
+  ajaxSetup: function () {
+    $.ajaxSetup({
+      beforeSend: function () {
+        app.loadingbar.show();
+      },
+      always: function () {
+        setTimeout(function () {
+          app.loadingbar.hide();
+        }, 2000);
+      }
+    });
   }
 };
 app.fn.init();
