@@ -17,47 +17,6 @@ var app = {
     }
   },
   fn: {
-    init: function () {
-      window.console || (window.console = { log: function () {} });
-      
-      app.fn.ajaxSetup();
-      window.jsBootstrap = true;
-      
-      var search = location.search.substring(1);
-      var pages = {
-        home: 'home',
-        error404: 'error404'
-      };
-      var page = pages.error404;
-      
-      try {
-        search = search?JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',function(key, value) { return key===""?value:decodeURIComponent(value) }):{};
-        console.log('search', search);
-        page = search.page || pages.home;
-      } catch (e) {
-        console.log(e);
-        page = search.page || pages.error404;
-      }
-      
-      delete search['page'];
-
-      $.get(page, search, {
-        success: function (res, status, xhr) {
-          var content = app.element.content.detach().empty();
-          
-          app.element.container.append(content.append(res));
-        },
-        progress: function (e) {
-          if (e.lengthComputable) {  
-            var percent = e.loaded / e.total * 100;
-            //console.log('Loading', percent);
-            app.element.loadingbar.width([percent, '%'].join(''));
-          } else {
-            //console.log('e length not computable');
-          }
-        }
-      });
-    },
     ajaxSetup: function () {
       $.ajaxSetup({
         beforeSend: function () {
@@ -69,6 +28,41 @@ var app = {
           }, 500);
         }
       });
+    },
+    loadPage: function () {
+      var search = location.search.substring(1);
+      var pages = {
+        home: 'home',
+        error404: 'error404'
+      };
+      var page = pages.error404;
+      try {
+        search = search?JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',function(key, value) { return key===""?value:decodeURIComponent(value) }):{};
+        console.log('search', search);
+        page = search.page || pages.home;
+      } catch (e) {
+        console.log(e);
+        page = search.page || pages.error404;
+      }
+      delete search['page'];
+      $.get(page, search, {
+        success: function (res, status, xhr) {
+          var content = app.element.content.detach().empty();
+          app.element.container.append(content.append(res));
+        },
+        progress: function (e) {
+          if (e.lengthComputable) {  
+            var percent = e.loaded / e.total * 100;
+            app.element.loadingbar.width([percent, '%'].join(''));
+          }
+        }
+      });
+    },
+    init: function () {
+      window.console || (window.console = { log: function () {} });
+      
+      app.fn.ajaxSetup();
+      app.fn.loadPage();
     }
   }
 };

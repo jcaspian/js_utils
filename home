@@ -3,6 +3,17 @@
 <p>
   some extensive shit is going on here
 </p>
-<!--
-<script src="js/jumper.js?v=2014-01-17-1"></script>
--->
+
+<script>
+app.extend = {
+  fn: {
+    bindEvent: function () {
+      console.log('binding event for home');
+    },
+    init: function () {
+      app.extend.fn.bindEvent();
+    }
+  }
+};
+app.extend.fn.init();
+</script>
