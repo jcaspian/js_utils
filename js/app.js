@@ -73,12 +73,12 @@ var app = {
       
       delete search['page'];
       
-      //app.ajax.getLoading(page, search, {
-      app.ajax.getLoading('http://upload.wikimedia.org/wikipedia/commons/2/2d/Snake_River_(5mb).jpg', search, {
+      app.ajax.getLoading(page, search, {
+      //app.ajax.getLoading('http://upload.wikimedia.org/wikipedia/commons/2/2d/Snake_River_(5mb).jpg', search, {
         done: function (res, status, xhr) {
-          console.log('done');
-          console.log(res);
-          console.log(xhr.getResponseHeader("content-type"));
+          // console.log('done');
+          // console.log(res);
+          // console.log(xhr.getResponseHeader("content-type"));
           var content = app.element.content.detach().empty();
           
           app.element.container.append(content.append(res));
