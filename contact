@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>contact</h1>
+
+  <p>
+    some extensive shit is going on here
+  </p>
+
+  <a href="home">home</a>
+</div>
+
+<script>
+app.ext = {
+  fn: {
+    bindEvent: function () {
+    },
+    init: function () {
+      app.ext.fn.bindEvent();
+    }
+  }
+};
+app.ext.fn.init();
+</script>

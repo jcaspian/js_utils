@@ -1,0 +1,22 @@
+body {
+  overflow: hidden;
+}
+
+a {
+  cursor: pointer;
+}
+
+.dropdown-menu > li {
+  white-space: nowrap;
+}
+
+.dropdown-menu > li > ul {
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu > li > ul > li > a {
+  padding: 3px 20px;
+}
